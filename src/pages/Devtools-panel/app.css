@@ -1,0 +1,29 @@
+.devtools-panel{
+  width: 100vw;
+  height: 100vh;
+  background-color: #242424;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-header{
+  padding-top: 10px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #999;
+}
+
+.panel-code{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  flex: 1;
+}
+
+.code-html{
+  width: 64%;
+  border-right: 1px solid #999;
+}
+
+.code-css{
+  width: 36%;
+}

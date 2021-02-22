@@ -1,0 +1,43 @@
+.skeleton-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding-left: 10px;
+  padding-right: 20px;
+}
+.form-instance {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.container-input{
+  min-width: 200px !important;
+}
+
+.form-instance .next-form-item {
+  display: flex;
+  flex-direction: row;
+  margin-right: 8px;
+  margin-bottom: 0;
+}
+
+.form-instance .next-form-item-label{
+  color: #fff;
+}
+
+.app-submit{
+  margin-left: 8px;
+}
+
+.control-preview{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.preview-label{
+  color: #fff;
+  margin-right: 4px;
+}

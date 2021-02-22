@@ -1,0 +1,20 @@
+.action-bar{
+  width: 100%;
+  box-sizing: border-box;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #3d424a;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.bar-title{
+  color: #ffffff;
+}
+
+.bar-action{
+  
+}

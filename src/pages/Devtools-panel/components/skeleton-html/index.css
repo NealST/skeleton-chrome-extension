@@ -1,0 +1,16 @@
+.skeleton-html{
+  height: 100%;
+}
+
+.code-tabs{
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #3d424a;
+}
+
+.tabs-item{
+  width: 80px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+}

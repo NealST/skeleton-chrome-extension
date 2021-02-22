@@ -1,0 +1,1 @@
+(()=>{function e(){chrome.runtime.sendMessage("skeleton-panel-shown")}function n(){chrome.runtime.sendMessage("skeleton-panel-hidden")}chrome.devtools.panels.create("Skeleton","icon-34.png","devtools-panel.html",(function(o){o.onShown.addListener(e),o.onHidden.addListener(n)}))})();
