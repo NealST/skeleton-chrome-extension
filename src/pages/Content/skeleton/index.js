@@ -7,6 +7,7 @@ import imgHandler from "./img-handler";
 import pseudosHandler from "./pseudos-handler";
 import grayHandler from "./gray-handler";
 import blockTextHandler from './block-text-handler';
+import inputHandler from "./input-handler";
 import {
   getComputedStyle,
   checkHasPseudoEle,
@@ -53,6 +54,7 @@ function traverse(containerEl, options) {
   let toRemove = [];
   const imgs = [];
   const svgs = [];
+  const inputs = [];
   const pseudos = [];
   const gradientBackEles = [];
   const grayBlocks = [];
@@ -60,7 +62,7 @@ function traverse(containerEl, options) {
     const styles = getComputedStyle(ele);
     const hasPseudoEle = checkHasPseudoEle(ele);
     if (
-      ele.id !== `${containerId}-clone` &&
+      !ele.classList.contains(`mz-sk-${containerId}-clone`) &&
       DISPLAY_NONE.test(ele.getAttribute("style"))
     ) {
       return toRemove.push(ele);
@@ -117,6 +119,12 @@ function traverse(containerEl, options) {
     if (ele.tagName === "svg") {
       return svgs.push(ele);
     }
+
+    // 输入框元素
+    if (ele.tagName === "INPUT") {
+      return inputs.push(ele);
+    }
+
     if (
       EXT_REG.test(styles.background) ||
       EXT_REG.test(styles.backgroundImage)
@@ -145,6 +153,7 @@ function traverse(containerEl, options) {
   })(containerEl);
 
   svgs.forEach((e) => svgHandler(e, svg, cssUnit, decimal));
+  inputs.forEach(e => inputHandler(e, themeColor));
   texts.forEach((e) => textHandler(e, text, cssUnit, decimal));
   buttons.forEach((e) => buttonHandler(e, button));
   hasImageBackEles.forEach((e) => backgroundHandler(e, image));
@@ -187,10 +196,12 @@ export function getHtmlAndStyle(containerEl) {
     existedMockEle.parentNode.removeChild(existedMockEle);
   }
   const mockEle = document.createElement('div');
+  const mockContainerEle = containerEl.cloneNode(true);
   mockEle.id = mockId;
   mockEle.style.display = 'none';
   document.body.appendChild(mockEle);
-  mockEle.appendChild(containerEl);
+  
+  mockEle.appendChild(mockContainerEle);
   return {
     style: document.getElementById('mz-skeleton').innerHTML,
     cleanedHtml: mockEle.innerHTML.replace(/&quot;/g, "'"),

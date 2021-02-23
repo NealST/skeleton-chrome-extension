@@ -7,7 +7,7 @@ chrome.runtime.onConnect.addListener(function (port) {
   var extensionListener = function (message, sender, sendResponse) {
     // 原始的连接事件不包含开发者工具网页的标签页标识符，
     // 所以我们需要显式发送它。
-    const { type, tabId } = message;
+    const { type, tabId } = message || {};
     if (type == "init") {
       connections[tabId] = port;
       return;
@@ -34,7 +34,7 @@ chrome.runtime.onConnect.addListener(function (port) {
 // 接收消息
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   console.log("request", request);
-  const { isToContent, tabId, info } = request;
+  const { isToContent, tabId, info = {} } = request;
   if (isToContent) {
     // 如果是传给内容脚本
     chrome.tabs.sendMessage(tabId, info, function (response) {

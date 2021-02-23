@@ -1,5 +1,9 @@
 // 工具方法类
 
+function insertAfter(newNode, existingNode) {
+  existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
+}
+
 const collectImportantComments = (css) => {
   const once = new Set();
   const cleaned = css.replace(/(\/\*![\s\S]*?\*\/)\n*/gm, (match, p1) => {
@@ -53,18 +57,18 @@ export const htmlFilter = function (htmlstr) {
 
 // 获取复制的容器元素
 export const getClonedContainerEl = function (containerEl, containerId) {
-  const cloneId = `${containerId}-clone`;
+  const cloneClass = `mz-sk-${containerId}-clone`;
   const skeletonStyle = document.getElementById('mz-skeleton');
-  let cloneContainerEl = document.getElementById(cloneId);
-  if (cloneContainerEl) {
-    cloneContainerEl.parentNode.removeChild(cloneContainerEl);
+  const existedCloneContainerEl = document.querySelector(`.${cloneClass}`);
+  if (existedCloneContainerEl) {
+    existedCloneContainerEl.parentNode.removeChild(existedCloneContainerEl);
   }
   if (skeletonStyle) {
     skeletonStyle.parentNode.removeChild(skeletonStyle);
   }
-  cloneContainerEl = containerEl.cloneNode(true);
+  let cloneContainerEl = containerEl.cloneNode(true);
   cloneContainerEl.style.display = "none";
-  cloneContainerEl.id = cloneId;
-  containerEl.parentNode.insertBefore(cloneContainerEl, containerEl);
+  cloneContainerEl.classList.add(cloneClass);
+  insertAfter(cloneContainerEl, containerEl);
   return cloneContainerEl;
 };

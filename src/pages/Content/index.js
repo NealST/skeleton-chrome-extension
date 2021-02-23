@@ -12,6 +12,7 @@ chrome.runtime.onMessage.addListener(async function(req, sender, sendRes) {
       const { containerId } = req.data;
       queryInfo = req.data;
       containerEl = document.querySelector(containerId);
+      // 如果找不到元素，就返回null
       if (!containerEl) {
         sendRes(null);
         return
