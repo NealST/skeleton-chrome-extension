@@ -197,6 +197,7 @@ export function getHtmlAndStyle(containerEl) {
   }
   const mockEle = document.createElement('div');
   const mockContainerEle = containerEl.cloneNode(true);
+  mockContainerEle.style.display = 'block';
   mockEle.id = mockId;
   mockEle.style.display = 'none';
   document.body.appendChild(mockEle);
