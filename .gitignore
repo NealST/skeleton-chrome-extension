@@ -20,3 +20,4 @@ secrets.*.js
 
 build.crx
 build.pem
+.vscode
